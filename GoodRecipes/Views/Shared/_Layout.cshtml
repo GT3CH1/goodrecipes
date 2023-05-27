@@ -9,11 +9,49 @@
 <html>
 <head>
     <title></title>
+    <link href="~/css/bulma.min.css" type="text/css" rel="stylesheet"/>
+    @await RenderSectionAsync("Stylesheets", required: false)
 </head>
 <body>
+
+<header>
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    Good Recipes
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="navbar-menu " id="navbar">
+                <div class="navbar-start">
+                    <a class="navbar-item has-icons-left" href="/">
+                        <span class="icon">
+                            <i class="fas fa-home"></i>
+                        </span>
+                        <span>Home</span>
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <partial name="_LoginPartial"/>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
 <div>
     Hello there, General Kenobi!
     @RenderBody()
 </div>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/e00a151875.js" crossorigin="anonymous"></script>
+@await RenderSectionAsync("Scripts", required: false);
+
 </body>
 </html>

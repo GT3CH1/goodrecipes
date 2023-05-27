@@ -5,6 +5,7 @@ builder.Services.AddRazorPages();
 var app = builder.Build();
 
 app.UseRouting();
+app.UseStaticFiles();
 
 // add IndexController
 app.MapControllerRoute(
