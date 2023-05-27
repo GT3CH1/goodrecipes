@@ -18,14 +18,29 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoodRecipes.Data.Models;
 
-public class Ingredient
+[PrimaryKey("Id")]
+public class Recipe
 {
-    public string Name { get; set; }
-    public IngredientCategory Category;
-
     [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id;
+
+    [Required] public string Name { get; set; }
+
+    [Required] public string ThumbnailUrl { get; set; }
+
+    public string? RecipeAuthor { get; set; } = null!;
+
+    [Required]
+    [ForeignKey("RecipeAuthor")]
+    public RecipeUser Author { get; set; }
+
+    [Required] public List<Instructions> InstructionsList { get; set; }
+
+    public string? Story { get; set; } = null!;
+
+    // public List<Tags> TagsList { get; set; }
 }

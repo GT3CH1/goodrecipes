@@ -18,9 +18,11 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoodRecipes.Data.Models;
 
+[PrimaryKey("Id")]
 public class Instructions
 {
     [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

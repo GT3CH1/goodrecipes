@@ -17,31 +17,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoodRecipes.Data.Models;
 
-public class RecipeUser : IdentityUser
+[PrimaryKey("Id")]
+public class Ingredient
 {
-    [Required]
-    [Display(Name = "Username")]
-    public string Username { get; set; }
+    public string Name { get; set; }
+    public IngredientCategory Category;
 
-    [Required]
-    [Display(Name = "Suspended")]
-    public bool Suspended { get; set; }
-
-    [Required]
-    [Display(Name = "End of Suspension")]
-    public DateTime? EndOfSuspension { get; set; } = null!;
-
-    public List<Ingredient>? FoodPreferences { get; set; } = null!;
-
-    public List<int>? Recipes { get; set; } = null!;
-
-    public List<int>? FavoriteRecipes { get; set; } = null;
-
-    public List<int>? Reviews { get; set; } = null;
-
-    public List<Guid>? Following { get; set; } = null!;
+    [Key] [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id;
 }
