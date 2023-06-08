@@ -26,8 +26,7 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     var um = scope.ServiceProvider.GetRequiredService<UserManager<RecipeUser>>();
     var rm = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    await db.InitializeDatabase();
-    await db.InitializeUsers(um, rm);
+    await db.InitializeDatabase(um, rm);
 }
 
 app.UseRouting();

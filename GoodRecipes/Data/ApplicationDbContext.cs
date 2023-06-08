@@ -27,33 +27,44 @@ public class ApplicationDbContext : IdentityDbContext<RecipeUser>
 {
     public DbSet<Recipe> Recipes { get; set; }
 
-    public async Task InitializeUsers(UserManager<RecipeUser> um, RoleManager<IdentityRole> rm)
+    public async Task InitializeRoles(RoleManager<IdentityRole> rm)
     {
-        var adminRole = new IdentityRole("Admin");
+        await rm.CreateAsync(new IdentityRole("Admin"));
+    }
 
-        if (await um.Users.AnyAsync())
-            return;
-
+    public async Task InitializeUsers(UserManager<RecipeUser> um)
+    {
         var admin = new RecipeUser()
         {
             Name = "Admin",
             UserName = "Admin",
             Email = "admin@admin.com",
-            EmailConfirmed = true,
+            EmailConfirmed = true
         };
-
-        await um.CreateAsync(admin, "Admin123!");
-        await rm.CreateAsync(adminRole);
+        await um.CreateAsync(admin, "Password1!");
         await um.AddToRoleAsync(admin, "Admin");
+
+        var user = new RecipeUser()
+        {
+            Name = "Giovanni Potage",
+            UserName = "BestVillain17523",
+            Email = "soup@bonzaiblasterszx324.com",
+            EmailConfirmed = true
+        };
+        await um.CreateAsync(user, "Password1!");
     }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
 
-    public async Task InitializeDatabase()
+    public async Task InitializeDatabase(UserManager<RecipeUser> um, RoleManager<IdentityRole> rm)
     {
         if ((await Database.GetPendingMigrationsAsync()).Any())
             await Database.MigrateAsync();
+        if (!rm.Roles.Any())
+            await InitializeRoles(rm);
+        if (!um.Users.Any())
+            await InitializeUsers(um);
     }
 }
