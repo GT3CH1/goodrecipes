@@ -19,27 +19,17 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace GoodRecipes.Data.Models;
+namespace GoodRecipes.Models;
 
 public class RecipeUser : IdentityUser
 {
     [Required]
-    [Display(Name = "Username")]
-    public string Name { get; set; }
+    [Display(Name = "DisplayName")]
+    public string DisplayName { get; set; } = null!;
 
-    [Required]
-    [Display(Name = "Suspended")]
-    public bool Suspended { get; set; } = false;
+    public List<Recipe>? RecipeBox { get; set; }
 
-    [Display(Name = "End of Suspension")] public DateTime? EndOfSuspension { get; set; } = null!;
+    public List<Recipe>? Recipes { get; set; }
 
-    public List<Ingredient>? FoodPreferences { get; set; } = null!;
-
-    public List<Recipe>? Recipes { get; set; } = null!;
-
-    // public List<int>? FavoriteRecipes { get; set; } = null;
-
-    // public List<int>? Reviews { get; set; } = null;
-
-    // public List<string>? Following { get; set; } = null!;
+    public List<Ingredient>? IngredientsAdded { get; set; }
 }
