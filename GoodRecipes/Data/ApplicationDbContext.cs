@@ -29,11 +29,26 @@ public class ApplicationDbContext : IdentityDbContext<RecipeUser>
 
     public async Task InitializeUsers(UserManager<RecipeUser> um)
     {
-        
     }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Recipe>()
+            .HasOne(r => r.Author)
+            .WithMany(u => u.Recipes)
+            .HasForeignKey(r => r.Id)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<RecipeUser>()
+            .HasMany(u => u.Recipes)
+            .WithOne(r => r.Author)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        base.OnModelCreating(modelBuilder);
     }
 
     public async Task InitializeDatabase(UserManager<RecipeUser> um, RoleManager<IdentityRole> rm)
