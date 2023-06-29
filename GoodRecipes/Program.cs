@@ -1,5 +1,5 @@
 using GoodRecipes.Data;
-using GoodRecipes.Data.Models;
+using GoodRecipes.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
