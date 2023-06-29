@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    var isAdmin = User.IsInRole("Admin");
 }
 
 <!DOCTYPE html>
@@ -35,6 +36,17 @@
                         <span>Home</span>
                     </a>
                 </div>
+                @if (isAdmin)
+                {
+                    <div class="navbar-start">
+                        <a class="navbar-item has-icons-left" asp-controller="Recipe">
+                            <span class="icon">
+                                <i class="fas fa-home"></i>
+                            </span>
+                            <span>Home</span>
+                        </a>
+                    </div>
+                }
                 <div class="navbar-end">
                     <partial name="_LoginPartial" />
                 </div>
