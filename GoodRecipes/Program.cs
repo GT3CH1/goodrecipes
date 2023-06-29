@@ -15,11 +15,9 @@ builder.Services
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 
-
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 var app = builder.Build();
-
 
 using (var scope = app.Services.CreateScope())
 {
@@ -31,7 +29,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseRouting();
 app.UseStaticFiles();
-
+app.UseAuthentication();
+app.UseAuthorization();
 // add IndexController
 app.MapControllerRoute(
     name: "default",

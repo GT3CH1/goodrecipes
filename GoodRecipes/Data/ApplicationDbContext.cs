@@ -27,8 +27,22 @@ public class ApplicationDbContext : IdentityDbContext<RecipeUser>
 {
     public DbSet<Recipe> Recipes { get; set; }
 
+    public async Task InitializeRoles(RoleManager<IdentityRole> rm)
+    {
+        await rm.CreateAsync(new IdentityRole("Admin"));
+    }
+    
     public async Task InitializeUsers(UserManager<RecipeUser> um)
     {
+        var admin = new RecipeUser()
+        {
+            DisplayName = "Admin",
+            UserName = "admin@admin.com",
+            Email = "admin@admin.com",
+            EmailConfirmed = true
+        };
+        await um.CreateAsync(admin, "Password1!");
+        await um.AddToRoleAsync(admin, "Admin");
     }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -55,6 +69,8 @@ public class ApplicationDbContext : IdentityDbContext<RecipeUser>
     {
         if ((await Database.GetPendingMigrationsAsync()).Any())
             await Database.MigrateAsync();
+        if(!rm.Roles.Any())
+            await InitializeRoles(rm);
         if (!um.Users.Any())
             await InitializeUsers(um);
     }
