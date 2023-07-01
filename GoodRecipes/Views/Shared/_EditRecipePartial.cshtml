@@ -1,0 +1,14 @@
+﻿@model GoodRecipes.Models.Recipe
+@{
+    ViewData["Title"] = "Create";
+}
+<input asp-for="Id" hidden="hidden"/>
+<div class="pt-2 is-full column">
+    <label asp-for="Name" class="label">Name</label>
+    <input asp-for="Name" class="input" type="text" placeholder="A super cool name"></input>
+    <span asp-validation-for="Name" class="message-is-danger"></span>
+</div>
+<div class="pt-2 is-full column">
+    <label asp-for="Description" class="label">Description</label>
+    <textarea class="input"></textarea>
+</div>
