@@ -6,3 +6,5 @@ riderModule.iml
 **/.idea
 **/app.db*
 **/.vs
+# mac thing
+**/.DS_STORE
