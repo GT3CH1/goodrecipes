@@ -17,19 +17,19 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace GoodRecipes.Models;
 
+[Table("RecipeUsers")]
 public class RecipeUser : IdentityUser
 {
     [Required]
-    [Display(Name = "DisplayName")]
     public string DisplayName { get; set; } = null!;
 
     public List<Recipe>? RecipeBox { get; set; }
-
+    [InverseProperty("Author")]
     public List<Recipe>? Recipes { get; set; }
-
     public List<Ingredient>? IngredientsAdded { get; set; }
 }

@@ -1,16 +1,33 @@
-﻿namespace GoodRecipes.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace GoodRecipes.Models;
+
+[Table("Recipes")]
 public class Recipe
 {
-    public string Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string? Description { get; set; }
-    public string ThumbnailPath { get; set; } = null!;
-    public string InstructionsPath { get; set; } = null!;
-    public string? StoryPath { get; set; }
-    public DateTime TimeCreated { get; set; }
-    public RecipeUser Author { get; set; } = null!;
+    public Recipe()
+    {
+        Name = null!;
+        InstructionsPath = null!;
+        Author = null!;
+        IngredientSections = new();
+        Hashtags = new();
+    }
 
-    public List<IngredientSection> IngredientSections { get; set; } = null!;
-    public List<Hashtag> Hashtags { get; set; } = null!;
+    public Guid Id { get; set; }
+    [Required]
+    public string Name { get; set; }
+    public string? Description { get; set; }
+    public string? ThumbnailPath { get; set; }
+    [Required]
+    public string InstructionsPath { get; set; }
+    public string? StoryPath { get; set; }
+    [Required]
+    public DateTime TimeCreated { get; set; }
+    [Required]
+    public RecipeUser Author { get; set; }
+
+    public List<IngredientSection> IngredientSections { get; set; }
+    public List<Hashtag> Hashtags { get; set; }
 }

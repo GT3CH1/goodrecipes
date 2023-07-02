@@ -27,11 +27,31 @@ public class ApplicationDbContext : IdentityDbContext<RecipeUser>
 {
     public DbSet<Recipe> Recipes { get; set; }
 
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
+    //protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //{
+    //    modelBuilder.Entity<Recipe>()
+    //        .HasOne(r => r.Author)
+    //        .WithMany(u => u.Recipes)
+    //        .HasForeignKey(r => r.Id)
+    //        .OnDelete(DeleteBehavior.Cascade);
+
+    //    modelBuilder.Entity<RecipeUser>()
+    //        .HasMany(u => u.Recipes)
+    //        .WithOne(r => r.Author)
+    //        .OnDelete(DeleteBehavior.Cascade);
+
+    //    base.OnModelCreating(modelBuilder);
+    //}
+
     public async Task InitializeRoles(RoleManager<IdentityRole> rm)
     {
         await rm.CreateAsync(new IdentityRole("Admin"));
     }
-    
+
     public async Task InitializeUsers(UserManager<RecipeUser> um)
     {
         var admin = new RecipeUser()
@@ -43,26 +63,6 @@ public class ApplicationDbContext : IdentityDbContext<RecipeUser>
         };
         await um.CreateAsync(admin, "Password1!");
         await um.AddToRoleAsync(admin, "Admin");
-    }
-
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Recipe>()
-            .HasOne(r => r.Author)
-            .WithMany(u => u.Recipes)
-            .HasForeignKey(r => r.Id)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<RecipeUser>()
-            .HasMany(u => u.Recipes)
-            .WithOne(r => r.Author)
-            .OnDelete(DeleteBehavior.Cascade);
-        
-        base.OnModelCreating(modelBuilder);
     }
 
     public async Task InitializeDatabase(UserManager<RecipeUser> um, RoleManager<IdentityRole> rm)

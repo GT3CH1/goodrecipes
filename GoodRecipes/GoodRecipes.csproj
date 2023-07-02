@@ -8,6 +8,8 @@
         <UserSecretsId>6843b15f-7d22-4a23-8656-a40d5f42f1fc</UserSecretsId>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
     <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>

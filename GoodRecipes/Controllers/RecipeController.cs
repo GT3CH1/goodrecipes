@@ -27,9 +27,9 @@ namespace GoodRecipes
         }
 
         // GET: Recipe/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null || _context.Recipes == null)
+            if (_context.Recipes == null)
             {
                 return NotFound();
             }
@@ -91,7 +91,7 @@ namespace GoodRecipes
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Description,ThumbnailPath,InstructionsPath,StoryPath,TimeCreated")] Recipe recipe)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,ThumbnailPath,InstructionsPath,StoryPath,TimeCreated")] Recipe recipe)
         {
             if (id != recipe.Id)
             {
@@ -123,9 +123,9 @@ namespace GoodRecipes
         }
 
         // GET: Recipe/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null || _context.Recipes == null)
+            if (_context.Recipes == null)
             {
                 return NotFound();
             }
@@ -144,7 +144,7 @@ namespace GoodRecipes
         // POST: Recipe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Recipes == null)
             {
@@ -160,7 +160,7 @@ namespace GoodRecipes
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RecipeExists(string id)
+        private bool RecipeExists(Guid id)
         {
           return (_context.Recipes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
