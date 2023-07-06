@@ -1,4 +1,15 @@
-﻿﻿const example_image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
+﻿const unit_options = [
+    "g",
+    "kg",
+    "ml",
+    "l",
+    "cups",
+    "tbsp",
+    "tsp"
+]
+
+
+const example_image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = false;
     xhr.open('POST', '/Image/Upload');
@@ -37,7 +48,6 @@
 
     xhr.send(formData);
 });
-
 tinymce.init({
     height: 600,
     selector: 'textarea',
@@ -81,4 +91,40 @@ tinymce.init({
     ],
 
     images_upload_handler: example_image_upload_handler
+});
+
+
+$(document).ready(function () {
+    // set 
+});
+
+// add "add-ingredient" button 
+$("#add-ingredient").click(function () {
+    /**
+     * Append this html to the "ingredients" div
+     * <div class="columns">
+     *         <div class="column">
+     *             <input asp-for="IngredientSections" class="input" type="text" placeholder="Ingredient name"></input>
+     *         </div>
+     *         <div class="column">
+     *             <input asp-for="IngredientSections" class="input" type="number" placeholder="Quantity"></input>
+     *         </div>
+     *         <div class="column">
+     *             <input asp-for="IngredientSections" class="input" type="text" placeholder="Unit"></input>
+     *         </div>
+     *     </div>
+     */
+    $("#ingredients").append(
+        '<div class="columns">' +
+        '<div class="column">' +
+        '<input asp-for="IngredientSections" class="input" type="text" placeholder="Ingredient name"></input>' +
+        '</div>' +
+        '<div class="column">' +
+        '<input asp-for="IngredientSections" class="input" type="number" placeholder="Quantity"></input>' +
+        '</div>' +
+        '<div class="column">' +
+        '<input asp-for="IngredientSections" class="input" type="text" placeholder="Unit"></input>' +
+        '</div>' +
+        '</div>'
+    );
 });

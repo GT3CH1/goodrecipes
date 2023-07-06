@@ -12,3 +12,22 @@
     <label asp-for="Description" class="label">Description</label>
     <textarea class="input"></textarea>
 </div>
+@* Ingredient section, and then a button to add more ingredients. *@
+<div class="pt-2 is-full column" id="ingredients">
+    <label asp-for="IngredientSections" class="label">Ingredients</label>
+    <div class="columns">
+        <div class="column">
+            <input asp-for="IngredientSections" class="input" type="text" placeholder="Ingredient name"></input>
+        </div>
+        <div class="column">
+            <input asp-for="IngredientSections" class="input" type="number" placeholder="Quantity"></input>
+        </div>
+        <div class="column">
+            <input asp-for="IngredientSections" class="input" type="text" placeholder="Unit"></input>
+        </div>
+    </div>
+</div>
+@* button to add more  *@
+<div class="pt-2 is-full column">
+    <button class="button is-primary" id="add-ingredient">Add ingredient</button>
+</div>

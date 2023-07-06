@@ -16,14 +16,25 @@
 // OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace GoodRecipes.Views.Shared;
+namespace GoodRecipes.Models;
 
-public class _Layout : PageModel
+public enum RecipeMeasurements
 {
-    public void OnGet()
-    {
-        
-    }
+    // What I want: [Display(Name = "CHANGE ME")] For all these measurements...
+    CUPS,
+    TABLESPOONS,
+    TEASPOONS,
+    PINTS,
+    QUARTS,
+    GALLONS,
+    OUNCES,
+    POUNDS,
+    GRAMS,
+    KILOGRAMS,
+    MILLILITERS,
+    LITERS,
+    NONE
 }
