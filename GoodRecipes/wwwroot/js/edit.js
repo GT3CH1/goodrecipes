@@ -1,11 +1,15 @@
 ﻿const unit_options = [
+    "mg",
     "g",
     "kg",
-    "ml",
-    "l",
-    "cups",
+    "mL",
+    "L",
+    "c",
     "tbsp",
-    "tsp"
+    "tsp",
+    "pt",
+    "qt",
+    "gal"
 ]
 
 
