@@ -4,6 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoodRecipes.Models;
 
+public enum Unit
+{
+    mg,
+    g,
+    kg,
+    mL,
+    L,
+    c,
+    tbsp,
+    tsp,
+    pt,
+    qt,
+    gal,
+    oz
+}
+
 [Table("IngredientSectionIngredients")]
 [Index(nameof(SectionId), nameof(IngredientId), IsUnique = true)]
 [Index(nameof(SectionId), nameof(Order), IsUnique = true)]

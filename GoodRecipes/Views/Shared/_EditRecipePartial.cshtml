@@ -1,7 +1,6 @@
 ﻿@model GoodRecipes.Models.Recipe
-@{
-    ViewData["Title"] = "Create";
-}
+@using GoodRecipes.Models
+
 <input asp-for="Id" hidden="hidden"/>
 <div class="pt-2 is-full column">
     <label asp-for="Name" class="label">Name</label>
@@ -17,17 +16,28 @@
     <label asp-for="IngredientSections" class="label">Ingredients</label>
     <div class="columns">
         <div class="column">
-            <input asp-for="IngredientSections" class="input" type="text" placeholder="Ingredient name">
+            <input asp-for="IngredientSections" class="input" type="text" placeholder="Ingredient">
         </div>
         <div class="column">
             <input asp-for="IngredientSections" class="input" type="number" placeholder="Quantity">
         </div>
         <div class="column">
-            <input asp-for="IngredientSections" class="input" type="text" placeholder="Unit">
+            <select asp-items="@Html.GetEnumSelectList<Unit>()" placeholder="Unit"></select>
         </div>
     </div>
 </div>
 @* button to add more  *@
 <div class="pt-2 is-full column">
     <button class="button is-primary" id="add-ingredient">Add ingredient</button>
+</div>
+<div class="pt-2 is-full column">
+    <label class="label">Instructions</label>
+    <textarea class="input"></textarea>
+</div>
+<div class="pt-2 is-full column">
+    <label class="label">Story</label>
+    <textarea class="input"></textarea>
+</div>
+<div>
+    <input type="submit" value="Create!" class="btn btn-primary" />
 </div>
