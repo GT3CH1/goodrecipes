@@ -9,7 +9,8 @@
     "tsp",
     "pt",
     "qt",
-    "gal"
+    "gal",
+    "oz"
 ]
 
 
